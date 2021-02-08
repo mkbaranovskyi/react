@@ -1,45 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
+
+function Welcome(props) {
+	return <h1>Hello, {props.name}</h1>
+}
+ReactDOM.render(<Welcome name="max" />, document.getElementById('root'))
 
 function App() {
 	return (
 		<div>
-			<NameForm />
+			<Welcome />
 		</div>
 	)
-}
-
-class NameForm extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = { value: '' }
-
-		this.handleChange = this.handleChange.bind(this)
-		this.handleSumbit = this.handleSumbit.bind(this)
-	}
-
-	// Without this, you won't be able to change the input value
-	handleChange(e) {
-		this.setState({ value: e.target.value })
-	}
-
-	handleSumbit(e) {
-		console.log(this.state.value)
-		e.target.elements.text.value = ''
-		e.preventDefault()
-	}
-
-	render() {
-		return (
-			<form onSubmit={this.handleSumbit}>
-				<label>
-					Name:
-					<input name="text" onChange={this.handleChange} />
-				</label>
-				<button type="submit">Submit</button>
-			</form>
-		)
-	}
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

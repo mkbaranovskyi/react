@@ -1,30 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import { ThemeContext, themes } from './themeContext'
+import ThemedButton from './ThemedButton'
+import './index.css'
 
-function Example() {
-	const [count, setCount] = useState(0)
-
-	// Similar to componentDidMount and componentDidUpdate
-	useEffect(() => {
-		// Update the document title using the browser API
-		document.title = `You clicked ${Date.now()} times`
-		return () => {
-			console.log(Date.now())
-		}
-	})
-
-	return (
-		<div>
-			<p>You clicked {Date.now()} times</p>
-			<button onClick={() => setCount(count + 1)}>Click me</button>
-		</div>
-	)
+function Toolbar(props) {
+	return <ThemedButton onClick={props.changeTheme} />
 }
 
 function App() {
+	const [theme, setTheme] = useState(themes.light)
+
+	function toggleTheme() {
+		setTheme(theme === themes.light ? themes.dark : themes.light)
+	}
+
 	return (
 		<div>
-			<Example />
+			{/* This component will take its context from the `value` of the nearest Provider */}
+			<ThemeContext.Provider value={theme}>
+				<Toolbar changeTheme={toggleTheme} />
+			</ThemeContext.Provider>
+			{/* This component doesn't have a Provider so it'll count on the default value of the Context*/}
+			<ThemedButton />
 		</div>
 	)
 }

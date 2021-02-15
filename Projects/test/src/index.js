@@ -1,35 +1,38 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { nanoid } from 'nanoid'
 
-function Table() {
+function Glossary(props) {
 	return (
-		<table>
-			<tbody>
-				<tr>
-					<Column />
-				</tr>
-				<tr>
-					<Column />
-				</tr>
-			</tbody>
-		</table>
+		<dl>
+			{props.items.map((item) => {
+				const elem = [<dt>{item.term}</dt>, <dd>{item.description}</dd>]
+				elem.key = item.id
+				return elem
+			})}
+		</dl>
 	)
 }
 
-function Column() {
-	return [
-		<td key={nanoid()}>1</td>,
-		<td key={nanoid()}>2</td>,
-		<td key={nanoid()}>3</td>
-	]
-	// return <td>1</td>
-}
+const glossary = [
+	{
+		id: nanoid(),
+		term: 'WHO',
+		description:
+			'The World Health Organization is a specialized agency of the United Nations responsible for international public health.'
+	},
+	{
+		id: nanoid(),
+		term: 'ISS',
+		description:
+			'The International Space Station is a modular space station in low Earth orbit.'
+	}
+]
 
 function App() {
 	return (
 		<div>
-			<Table />
+			<Glossary items={glossary} />
 		</div>
 	)
 }

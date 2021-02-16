@@ -1,40 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import { nanoid } from 'nanoid'
 
-function Glossary(props) {
-	return (
-		<dl>
-			{props.items.map((item) => {
-				const elem = [<dt>{item.term}</dt>, <dd>{item.description}</dd>]
-				elem.key = item.id
-				return elem
-			})}
-		</dl>
-	)
+class CustomTextInput extends React.Component {
+	// 1)
+	textInput = React.createRef()
+
+	focusTextInput = () => {
+		// 3)
+		this.textInput.current.focus()
+	}
+
+	componentDidMount() {
+		this.focusTextInput()
+	}
+
+	render() {
+		return (
+			// 2)
+			<div>
+				<input ref={this.textInput} />
+				<button type="button" onClick={this.focusTextInput}>
+					"Focus the text input!"
+				</button>
+			</div>
+		)
+	}
 }
 
-const glossary = [
-	{
-		id: nanoid(),
-		term: 'WHO',
-		description:
-			'The World Health Organization is a specialized agency of the United Nations responsible for international public health.'
-	},
-	{
-		id: nanoid(),
-		term: 'ISS',
-		description:
-			'The International Space Station is a modular space station in low Earth orbit.'
-	}
-]
-
 function App() {
-	return (
-		<div>
-			<Glossary items={glossary} />
-		</div>
-	)
+	return <CustomTextInput />
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

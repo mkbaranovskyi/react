@@ -1,34 +1,34 @@
-import React, { useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
-class CustomTextInput extends React.Component {
-	// 1)
-	textInput = React.createRef()
+function CustomTextInput() {
+	const textInput = useRef(null) // 1
 
-	focusTextInput = () => {
-		// 3)
-		this.textInput.current.focus()
+	useEffect(() => {
+		focusTextInput() // 4 - Focus after render
+	})
+
+	const focusTextInput = () => {
+		textInput.current.focus() // 3
 	}
 
-	componentDidMount() {
-		this.focusTextInput()
-	}
-
-	render() {
-		return (
-			// 2)
-			<div>
-				<input ref={this.textInput} />
-				<button type="button" onClick={this.focusTextInput}>
-					"Focus the text input!"
-				</button>
-			</div>
-		)
-	}
+	return (
+		<div>
+			<input ref={textInput} />
+			<button type="button" onClick={focusTextInput}>
+				Focus the text input!
+			</button>
+		</div>
+	)
 }
 
 function App() {
-	return <CustomTextInput />
+	return (
+		<div></div>
+		// <React.StrictMode>
+		// <CustomTextInput />
+		// </React.StrictMode>
+	)
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

@@ -1,33 +1,26 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css'
 
-function CustomTextInput() {
-	const textInput = useRef(null) // 1
-
-	useEffect(() => {
-		focusTextInput() // 4 - Focus after render
-	})
-
-	const focusTextInput = () => {
-		textInput.current.focus() // 3
+function FormInput() {
+	function changeForm(event) {
+		console.log(event.target)
+		event.preventDefault()
 	}
 
 	return (
-		<div>
-			<input ref={textInput} />
-			<button type="button" onClick={focusTextInput}>
-				Focus the text input!
-			</button>
-		</div>
+		<form name="formData" onSubmit={changeForm}>
+			<input name="inputWindow" placeholder="Введите название" />
+			<button name="buttonSend">Добавить элемент</button>
+		</form>
 	)
 }
 
 function App() {
 	return (
-		<div></div>
-		// <React.StrictMode>
-		// <CustomTextInput />
-		// </React.StrictMode>
+		<div>
+			<FormInput />
+		</div>
 	)
 }
 

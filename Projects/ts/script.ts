@@ -10,11 +10,16 @@ button.addEventListener('click', () => {
 	console.log(add(+input1.value, +input2.value))
 })
 
-function reverse<Type>(array: Type[]): Type[] {
-	return array.reverse()
+type User = {
+	_id: number
+	name: string
+	email: string
+	createdAt: Date
 }
 
-console.log(reverse([1, 2, 3, 4, 5]))
-console.log(reverse(['ku', 'ept']))
-console.log(reverse([true, false, false]))
-console.log(reverse([true, 1, 'str']))
+type UserKeysNoMeta = Pick<User, 'name' | 'email'>
+
+let user: UserKeysNoMeta = {
+	name: 'max',
+	email: 'max@bar'
+}

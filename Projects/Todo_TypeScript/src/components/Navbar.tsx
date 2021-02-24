@@ -1,4 +1,6 @@
 import React from 'react'
+// This is for our app to work in the SPA mode, method 1
+import { NavLink } from 'react-router-dom'
 
 export const Navbar: React.FC = () => {
 	return (
@@ -9,10 +11,10 @@ export const Navbar: React.FC = () => {
 				</a>
 				<ul className="right hide-on-med-and-down">
 					<li>
-						<a href="/">Tasks</a>
+						<NavLink to="/">Tasks</NavLink>
 					</li>
 					<li>
-						<a href="/">Info</a>
+						<NavLink to="/info">Info</NavLink>
 					</li>
 				</ul>
 			</div>

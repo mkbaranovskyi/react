@@ -12,9 +12,7 @@ export const TodoForm: React.FC<TodoFormProps> = (props) => {
 	// 	setTitle(event.target.value)
 	// }
 
-	const keyPressHandler = (
-		event: React.KeyboardEvent<HTMLInputElement>
-	): void => {
+	const keyPressHandler = (event: React.KeyboardEvent<HTMLInputElement>): void => {
 		if (event.key === 'Enter') {
 			props.onAdd(ref.current!.value)
 			ref.current!.value = ''
@@ -33,7 +31,6 @@ export const TodoForm: React.FC<TodoFormProps> = (props) => {
 					onKeyPress={keyPressHandler}
 				/>
 			</label>
-			{/* <button type="submit">Add task</button> */}
 		</div>
 	)
 }

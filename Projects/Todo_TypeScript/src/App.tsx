@@ -8,7 +8,7 @@ const App: React.FC = () => {
 	return (
 		<BrowserRouter>
 			<Navbar />
-			<div className="container"></div>
+
 			<Switch>
 				<Route component={TodoPage} path="/" exact />
 				<Route component={InfoPage} path="/info" />

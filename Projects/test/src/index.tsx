@@ -1,137 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-
-interface ITask {
-	id: number
-	title: string
-	active: boolean
-}
-
-const myTasks: ITask[] = [
-	{
-		id: 1,
-		title: 'Buy milk',
-		active: false
-	},
-	{
-		id: 2,
-		title: 'Buy bread',
-		active: false
-	},
-	{
-		id: 3,
-		title: 'Buy chocolate',
-		active: false
-	},
-	{
-		id: 4,
-		title: 'Buy fruits',
-		active: false
-	},
-	{
-		id: 5,
-		title: 'Buy vegetables',
-		active: true
-	}
-]
-
-const Task: React.FC<{
-	task: ITask
-	onactivateTask: Function
-	onRemove: Function
-	onMouseOver: Function
-	onMouseOut: Function
-	hoveredIndex: number
-}> = ({ task, onactivateTask, onRemove, onMouseOver, onMouseOut, hoveredIndex }) => {
-	const removeButtonRef = useRef<HTMLSpanElement>(null)
-
-	const classes: string[] = ['task']
-	if (task.active) {
-		classes.push('active')
-	}
-
-	useEffect(() => {
-		let removeButton
-		if (removeButtonRef.current) {
-			removeButton = removeButtonRef.current
-		} else return
-
-		if (task.id === hoveredIndex) {
-			removeButton.classList.remove('hidden')
-		} else {
-			removeButton.classList.add('hidden')
-		}
-	}, [task.id, hoveredIndex])
-
-	return (
-		<li
-			className={classes.join(' ')}
-			onClick={onactivateTask.bind(null, task.id)}
-			onMouseOver={(event) => onMouseOver(task.id)}
-			onMouseOut={(event) => onMouseOut(task.id)}
-		>
-			{task.title}
-			<span className="material-icons red-text hidden" onClick={(event) => onRemove(task.id)} ref={removeButtonRef}>
-				delete
-			</span>
-		</li>
-	)
-}
-
-const List: React.FC<{ taskList: ITask[] }> = ({ taskList }) => {
-	const [tasks, setTasks] = useState<ITask[]>(taskList)
-	const [hoveredIndex, setHoveredIndex] = useState<number>(-1)
-
-	const activateTask = (id: number): void => {
-		setTasks((prevState) =>
-			prevState.map((task) => {
-				if (task.id === id) {
-					return { ...task, active: true }
-				}
-				return { ...task, active: false }
-			})
-		)
-	}
-
-	const removeTask = (id: number): void => {
-		setTasks((prevState) => prevState.filter((task) => task.id !== id))
-	}
-
-	const mouseOverHandler = (id: number): void => {
-		setHoveredIndex(id)
-	}
-
-	const mouseOutHandler = (id: number): void => {
-		setHoveredIndex(-1)
-	}
-
-	return (
-		<ul>
-			{tasks.map((task) => {
-				return (
-					<Task
-						task={task}
-						key={task.id}
-						onactivateTask={activateTask}
-						onRemove={removeTask}
-						onMouseOver={mouseOverHandler}
-						onMouseOut={mouseOutHandler}
-						hoveredIndex={hoveredIndex}
-					/>
-				)
-			})}
-		</ul>
-	)
-}
-
-const App: React.FC = () => {
-	return <List taskList={myTasks} />
-}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import { store } from './app/store';
+import { Provider } from 'react-redux';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
-	document.getElementById('root')
-)
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

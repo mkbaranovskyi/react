@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<title>Max Redux</title>
+
+<script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+
+<body>
+	<div>
+		<p>Clicked: <span id="clicked"></span> times</p>
+		<button id="increment">+</button>
+		<button id="decrement">-</button>
+		<button id="incrementAsync">+ async</button>
+	</div> 	
+
+	<script>
+		const $clickedElem = document.getElementById('clicked')
+		const $incrementBtn = document.getElementById('increment')
+		const $decrementBtn = document.getElementById('decrement')
+		const $incrementAsyncBtn = document.getElementById('incrementAsync')
+
+		const initialState = {
+			value: 0
+		}
+
+		function counterReducer(state = initialState, action){
+			switch(action.type){
+				case 'counter/increment':
+					return {...state, value: state.value + 1}
+				case 'counter/decrement':
+					return {...state, value: state.value - 1}
+				default:
+					return state
+			}
+		}
+
+		function render(){
+			const state = store.getState()
+			$clickedElem.textContent = state.value
+		}
+
+		const store = Redux.createStore(counterReducer)
+
+		render()	// render the initial state
+		store.subscribe(render)	// re-render whenever the state changes
+
+		$incrementBtn.addEventListener('click', () => {
+			const action = {
+				type: 'counter/increment'
+			}
+			store.dispatch(action)
+		})
+
+		$decrementBtn.addEventListener('click', () => {
+			const action = {
+				type: 'counter/decrement'
+			}
+			store.dispatch(action)
+		})
+
+		$incrementAsyncBtn.addEventListener('click', () => {
+			const action = {
+				type: 'counter/increment'
+			}
+			setTimeout(() => {
+				store.dispatch(action)
+			}, 1000)
+		})
+
+	</script>
+</body>

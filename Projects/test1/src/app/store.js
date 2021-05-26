@@ -15,7 +15,7 @@ if (persistedTodosString) {
 	}
 }
 
-export const store = configureStore({
+export default configureStore({
 	reducer: rootReducer,
 	middleware: [print1, print2, print3],
 	preloadedState,

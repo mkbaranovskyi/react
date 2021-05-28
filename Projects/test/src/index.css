@@ -21,3 +21,8 @@ button {
 .selected {
 	border: 1px solid crimson;
 }
+
+form.colorSelection {
+	display: flex;
+	flex-direction: column;
+}

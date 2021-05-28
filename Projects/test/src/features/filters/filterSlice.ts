@@ -3,11 +3,15 @@ const initialState = {
 	colors: []
 }
 
-export default function filtersReducer(state = initialState, action) {
+type Action = {
+	type: string
+	payload?: any
+}
+
+export default function filtersReducer(state = initialState, action: Action) {
 	switch (action.type) {
 		case 'filters/statusFilterChanged': {
 			return {
-				// Again, one less level of nesting to copy
 				...state,
 				status: action.payload
 			}

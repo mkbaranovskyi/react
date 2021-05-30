@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid'
+import { stringify } from 'querystring'
 import React from 'react'
 import { StatusFilters } from '../../types'
 import { availableColors, capitalize } from '../filters/colors'
@@ -45,15 +46,22 @@ const StatusFilter: React.FC<{ value: string; onChange: Function }> = ({
 	)
 }
 
-const ColorFilters: React.FC<{ value: string[] }> = ({ value: colors }) => {
+const ColorFilters: React.FC<{ value: string[]; onChange: Function }> = ({
+	value: colors,
+	onChange
+}) => {
 	const renderedColors = availableColors.map((color) => {
-		console.log(color)
+		const checked: boolean = colors.includes(color)
+		const handleChange = () => {
+			const changeType: string = checked ? 'removed' : 'added'
+			onChange(color, changeType)
+		}
+
 		return (
 			<label key={color}>
-				<input type="checkbox" />
-				<span className="color-block" style={{ backgroundColor: color }}>
-					{capitalize(color)}
-				</span>
+				<input type="checkbox" checked={checked} onChange={handleChange} />
+				<span className="color-block" style={{ backgroundColor: color }}></span>
+				{capitalize(color)}
 			</label>
 		)
 	})
@@ -70,12 +78,15 @@ const Footer: React.FC = () => {
 	const colors: string[] = []
 	const status: string = StatusFilters.all
 	const onStatusChange = (status: string) => console.log(status)
+	const onColorChange = (color: string, changeType: string) => {
+		console.log('Color change', { color, changeType })
+	}
 
 	return (
 		<footer className="footer">
 			<RemainingTodos count={3} />
 			<StatusFilter value={status} onChange={onStatusChange} />
-			<ColorFilters value={colors} />
+			<ColorFilters value={colors} onChange={onColorChange} />
 		</footer>
 	)
 }

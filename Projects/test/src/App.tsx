@@ -1,24 +1,20 @@
 import React from 'react'
-import './App.css'
-import Footer from './features/footer/Footer'
-import Header from './features/header/Header'
+import TodoList from './features/todos/TodoList'
 
-const App: React.FC = () => {
+function App() {
+	const todos = [
+		{ id: 1, completed: false, title: 'But bread' },
+		{ id: 2, completed: true, title: 'Buy milk' },
+		{ id: 3, completed: false, title: 'Buy flowers' }
+	]
+
+	const toggleTodo: Function = (index: number): void => {
+		console.log(index)
+	}
+
 	return (
-		<div className="App">
-			<nav>
-				<section>
-					<h1>Redux Todo Example</h1>
-				</section>
-			</nav>
-			<main>
-				<section className="medium-container"></section>
-				<h2>Todos</h2>
-				<div className="todoapp">
-					<Header />
-					<Footer />
-				</div>
-			</main>
+		<div className="wrapper">
+			<TodoList todos={todos} onChange={toggleTodo} />
 		</div>
 	)
 }

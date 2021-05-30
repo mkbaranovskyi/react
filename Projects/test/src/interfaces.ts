@@ -1,6 +1,5 @@
-export interface ITask {
+export default interface ITodo {
 	id: number
-	title: string
 	completed: boolean
-	color?: string
+	title: string
 }

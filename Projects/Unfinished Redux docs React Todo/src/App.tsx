@@ -1,7 +1,9 @@
 import React from 'react'
 import './App.css'
+import Footer from './features/footer/Footer'
+import Header from './features/header/Header'
 
-function App() {
+const App: React.FC = () => {
 	return (
 		<div className="App">
 			<nav>
@@ -12,7 +14,10 @@ function App() {
 			<main>
 				<section className="medium-container"></section>
 				<h2>Todos</h2>
-				<div className="todoapp"></div>
+				<div className="todoapp">
+					<Header />
+					<Footer />
+				</div>
 			</main>
 		</div>
 	)

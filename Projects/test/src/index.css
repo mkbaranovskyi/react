@@ -1,4 +1,4 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
 
 body {
 	margin: 0;
@@ -14,15 +14,30 @@ code {
 		monospace;
 }
 
-button {
-	border: none;
-}
-
-.selected {
-	border: 1px solid crimson;
-}
-
-form.colorSelection {
+.wrapper {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	padding-top: 5rem;
+}
+
+.todoItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5rem;
+	padding: 0.5rem 1rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.todoItem input[type='checkbox'] {
+	margin-right: 1rem;
+}
+
+.removeButton {
+	background: #c33f36;
+	color: #fff;
+	border-radius: 5px;
+	border: none;
 }

@@ -14,7 +14,7 @@ code {
 		monospace;
 }
 
-.wrapper {
+.App {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -40,4 +40,13 @@ code {
 	color: #fff;
 	border-radius: 5px;
 	border: none;
+	cursor: pointer;
+}
+
+.completed {
+	text-decoration: line-through;
+}
+
+.addTodo {
+	margin-bottom: 1rem;
 }

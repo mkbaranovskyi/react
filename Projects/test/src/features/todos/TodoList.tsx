@@ -1,5 +1,5 @@
 import React from 'react'
-import ITodo from '../../interfaces'
+import { ITodo } from '../../type'
 import TodoItem from './TodoItem'
 
 const styles = {
@@ -12,8 +12,8 @@ const styles = {
 
 const TodoList: React.FC<{
 	todos: ITodo[]
-	onChange: Function
-}> = ({ todos, onChange }) => {
+	onToggle: Function
+}> = ({ todos, onToggle }) => {
 	return (
 		<ul style={styles.ul}>
 			{todos.map((todo, index) => (
@@ -21,7 +21,7 @@ const TodoList: React.FC<{
 					todo={todo}
 					key={todo.id}
 					index={index + 1}
-					onChange={onChange}
+					onToggle={onToggle}
 				/>
 			))}
 		</ul>

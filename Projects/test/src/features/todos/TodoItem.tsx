@@ -1,22 +1,34 @@
-import React from 'react'
-import ITodo from '../../interfaces'
+import React, { useContext } from 'react'
+import Context from '../../context'
+import { ITodo, ContextType } from '../../type.d'
 
 const TodoItem: React.FC<{
 	todo: ITodo
 	index: number
-	onChange: Function
-}> = ({ todo, index, onChange: toggleTodo }) => {
-	// Это ебучая функция, а не ChangeEventHandler!!! Этот пидарский хендлер вызывается по онЧейнджу и вызывает обычную ебаную функцию ВНУТРИ СЕБЯ!
+	onToggle: Function
+}> = ({ todo, index, onToggle: toggleTodo }) => {
+	const { removeTodo } = useContext<ContextType>(Context)
+
+	const classes: string[] = []
+	if (todo.completed) {
+		classes.push('completed')
+	}
 
 	return (
 		<li className="todoItem">
-			<span>
-				<input type="checkbox" onChange={(e) => toggleTodo(index)} />
+			<span className={classes.join(' ')}>
+				<input
+					type="checkbox"
+					onChange={(e) => toggleTodo(index)}
+					checked={todo.completed}
+				/>
 				<strong>{index}</strong>
 				&nbsp;
 				{todo.title}
 			</span>
-			<button className="removeButton">&times;</button>
+			<button className="removeButton" onClick={() => removeTodo(todo.id)}>
+				&times;
+			</button>
 		</li>
 	)
 }

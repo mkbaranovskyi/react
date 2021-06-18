@@ -55,7 +55,7 @@ describe('Ajax: get', () => {
 		}
 	})
 
-	test('Should return data from the backend', () => {
+	test('Should fetch', () => {
 		// Instead of making the actual request, Jest will simply return the object we defined
 		axios.get.mockReturnValue(response)
 		return Ajax.get().then((response) => {

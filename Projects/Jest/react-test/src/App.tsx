@@ -5,7 +5,7 @@ import Link from './features/Link/Link'
 function App() {
 	return (
 		<div className="App">
-			<Link page="https://youtube.com" children="Youtube" />
+			<Link page="#">{"\"Facebook\" \\'is \\ 'awesome'"}</Link>
 		</div>
 	)
 }

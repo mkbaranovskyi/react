@@ -13,12 +13,9 @@ code {
 }
 
 .hovered {
-	color: mediumturquoise;
-	font-weight: bold;
+	color: lightseagreen;
 }
 
 .normal {
-	color: inherit;
-	font-weight: normal;
-	text-decoration: none;
+	color: greenyellow;
 }

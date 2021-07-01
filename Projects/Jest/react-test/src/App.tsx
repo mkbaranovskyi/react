@@ -1,13 +1,8 @@
 import React from 'react'
 import './App.css'
-import Link from './features/Link/Link'
 
 function App() {
-	return (
-		<div className="App">
-			<Link page="#">{"\"Facebook\" \\'is \\ 'awesome'"}</Link>
-		</div>
-	)
+	return <div className="App"></div>
 }
 
 export default App

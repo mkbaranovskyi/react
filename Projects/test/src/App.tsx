@@ -1,36 +1,54 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import ErrorBoundary from './features/ErrorBoundary/ErrorBounday'
 
-interface IState {
-	counter: number
-}
+const BuggyCounter: React.FC = () => {
+	const [counter, setCounter] = useState(0)
 
-class MyComponent extends React.PureComponent {
-	constructor(props: any) {
-		super(props)
-		this.state = {
-			counter: 0
-		} as IState
-
-		// The value of Counter is updated to same value during continues interval
-
-		setInterval(() => {
-			this.setState({
-				counter: 0
-			})
-		}, 1000)
+	const handleClick = () => {
+		setCounter(() => counter + 1)
 	}
 
-	render() {
-		// This function wont be re-rendered in case when the new state is same as previous
-
-		return <b>Counter Value: {this.state.counter}</b>
+	if (counter === 3) {
+		throw new Error('I crashed!')
 	}
+
+	return <h1 onClick={handleClick}>{counter}</h1>
 }
 
 function App() {
 	return (
-		<div className="App">
-			<MyComponent />
+		<div>
+			<p>
+				<b>
+					This is an example of error boundaries in React 16.
+					<br />
+					<br />
+					Click on the numbers to increase the counters.
+					<br />
+					The counter is programmed to throw when it reaches 3. This simulates a
+					JavaScript error in a component.
+				</b>
+			</p>
+			<hr />
+			<ErrorBoundary>
+				<p>
+					These two counters are inside the same error boundary. If one crashes,
+					the error boundary will replace both of them.
+				</p>
+				<BuggyCounter />
+				<BuggyCounter />
+			</ErrorBoundary>
+			<hr />
+			<p>
+				These two counters are each inside of their own error boundary. So if
+				one crashes, the other is not affected.
+			</p>
+			<ErrorBoundary>
+				<BuggyCounter />
+			</ErrorBoundary>
+			<ErrorBoundary>
+				<BuggyCounter />
+			</ErrorBoundary>
 		</div>
 	)
 }

@@ -1,7 +1,7 @@
 import React from 'react'
-import '../App.css'
+import '../../index.css'
 
-function Home() {
+const Home: React.FC = () => {
 	return (
 		<div>
 			<h1>Home Page</h1>

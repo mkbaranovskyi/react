@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../App.css'
+import '../../index.css'
 
 const navStyle = {
 	color: 'black',
 	textDecoration: 'none'
 }
 
-function Nav() {
+const Nav: React.FC = () => {
 	return (
 		<nav>
 			<Link style={navStyle} to="/">

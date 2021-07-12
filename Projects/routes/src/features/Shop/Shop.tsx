@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import '../App.css'
+import '../../index.css'
 
-function Shop() {
+interface Item {
+	id: string
+	devName: string
+	name: string
+	description: string
+	category: string
+	fullUsageRights: boolean
+	images: Object
+}
+
+const Shop: React.FC = () => {
+	const [items, setItems] = useState<Item[]>([])
+
 	const fetchItems = async () => {
 		const response = await fetch('https://fortnite-api.com/v1/banners')
-		const items = (await response.json()).data
+		const items: Item[] = (await response.json()).data
 		console.log(items)
 		setItems(items)
 	}
-
-	const [items, setItems] = useState([])
 
 	useEffect(() => {
 		fetchItems()

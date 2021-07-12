@@ -1,7 +1,7 @@
 import React from 'react'
-import '../App.css'
+import '../../index.css'
 
-function About() {
+const About: React.FC = () => {
 	return (
 		<div>
 			<h1>About Page</h1>

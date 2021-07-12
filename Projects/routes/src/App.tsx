@@ -1,13 +1,13 @@
 import React from 'react'
-import Nav from './components/Nav'
-import Home from './components/Home'
-import About from './components/About'
-import Shop from './components/Shop'
-import ItemDetail from './components/ItemDetail'
+import Nav from './features/Nav/Nav'
+import Home from './features/Home/Home'
+import About from './features/About/About'
+import Shop from './features/Shop/Shop'
+import ItemDetail from './features/ItemDetail/ItemDetail'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import './App.css'
+import './index.css'
 
-function App() {
+const App: React.FC = () => {
 	return (
 		<Router>
 			<div className="App">

@@ -1,7 +1,7 @@
 import React from 'react'
-import '../App.css'
+import '../../index.css'
 
-function ItemDetail({ match }) {
+const ItemDetail: React.FC<{ match: any }> = ({ match }) => {
 	return (
 		<div>
 			<h1>Item</h1>

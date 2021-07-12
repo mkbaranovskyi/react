@@ -1,32 +1,13 @@
-import React, { useState } from 'react'
-
-const NameForm = () => {
-	const [username, setUsername] = useState('')
-
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		console.log(username)
-		e.target.elements.username.value = ''
-	}
-
-	const handleChange = (e) => {
-		setUsername(e.target.value)
-	}
-
-	return (
-		<form onSubmit={handleSubmit}>
-			<label>
-				Name:
-				<input name="username" onChange={handleChange} />
-			</label>
-		</form>
-	)
-}
+import React from 'react'
+import ClickComponent from './features/ClickComponent'
+import HoverComponent from './features/HoverComponent'
 
 function App() {
 	return (
 		<div className="App">
-			<NameForm />
+			{/* `name` is to test if the component is getting its props normally without losing them */}
+			<ClickComponent name="Max" />
+			<HoverComponent />
 		</div>
 	)
 }

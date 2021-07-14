@@ -1,5 +1,5 @@
 import { createStore } from './createStore'
-import { DECREMENT, INCREMENT } from '../../redux-test/src/redux/types'
+import { DECREMENT, INCREMENT } from './redux/types'
 import { rootReducer } from './redux/rootReducer'
 import './styles.css'
 
@@ -30,9 +30,9 @@ store.dispatch({ type: 'INIT_APPLICATION' })
 // This type doesn't exist and doesn't matter - default '0' will be rendered
 
 $asyncBtn.addEventListener('click', () => {
-	// se
+	setTimeout(() => store.dispatch({ type: INCREMENT }), 1000)
 })
 
 $themeBtn.addEventListener('click', () => {
-	// document.body.classList.toggle('dark')
+	document.body.classList.toggle('dark')
 })

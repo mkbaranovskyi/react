@@ -1,8 +1,8 @@
-export const sayHiOnDispatch = (createStore) => {
-	return (rootReducer, preloadedState, enhancers) => {
+export const sayHiOnDispatch =
+	(createStore) => (rootReducer, preloadedState, enhancers) => {
 		const store = createStore(rootReducer, preloadedState, enhancers)
 
-		function newDispatch(action) {
+		const newDispatch = (action) => {
 			const result = store.dispatch(action)
 			console.log('Enhancer Hi!')
 			return result
@@ -10,19 +10,15 @@ export const sayHiOnDispatch = (createStore) => {
 
 		return { ...store, dispatch: newDispatch }
 	}
-}
 
-export const includeMeaningOfLife = (createStore) => {
-	return (rootReducer, preloadedState, enhancers) => {
+export const includeMeaningOfLife =
+	(createStore) => (rootReducer, preloadedState, enhancers) => {
 		const store = createStore(rootReducer, preloadedState, enhancers)
 
-		function newGetState() {
-			return {
-				...store.getState(),
-				meaningOfLife: 42
-			}
-		}
+		const newGetState = () => ({
+			...store.getState(),
+			meaningOfLife: 42
+		})
 
 		return { ...store, getState: newGetState }
 	}
-}

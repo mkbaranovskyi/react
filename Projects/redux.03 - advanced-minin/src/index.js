@@ -17,14 +17,10 @@ const $asyncBtn = document.getElementById('async')
 const $themeBtn = document.getElementById('theme')
 
 // Example middleware
-function logger(store) {
-	return function (next) {
-		return function (action) {
-			console.log('state: ', store.getState())
-			console.log('action: ', action)
-			return next(action)
-		}
-	}
+const logger = (store) => (next) => (action) => {
+	console.log('state: ', store.getState())
+	console.log('action: ', action)
+	return next(action)
 }
 
 const store = createStore(
@@ -50,15 +46,12 @@ $themeBtn.addEventListener('click', () => {
 // According to the Observer pattern, we subscribe to our changes
 store.subscribe(() => {
 	$counter.textContent = store.getState().counter
-
 	document.body.className = store.getState().theme.value
 
+	const isDisabled = store.getState().theme.disabled
 	const buttons = Array.from(document.getElementsByTagName('button'))
-	buttons.forEach((button) => {
-		button.disabled = store.getState().theme.disabled
-	})
+	buttons.forEach((button) => (button.disabled = isDisabled))
 })
 
-// Render the initial state
+// Render the initial state. This type doesn't exist and doesn't matter, it's just here as an example
 store.dispatch({ type: 'INIT_APPLICATION' })
-// This type doesn't exist and doesn't matter - default '0' will be rendered

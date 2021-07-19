@@ -15,10 +15,12 @@ code {
 }
 
 .App {
-	display: flex;
+	/* display: flex;
 	flex-direction: column;
-	align-items: center;
-	margin-top: 5rem;
+	align-items: center; */
+	display: grid;
+	grid-template-columns: auto auto;
+	margin: 5rem;
 }
 
 .App button {
@@ -27,4 +29,10 @@ code {
 	margin: 10px;
 	height: 40px;
 	border-radius: 5px;
+}
+
+li.todoItem {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }

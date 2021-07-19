@@ -6,7 +6,6 @@ function nextTodoId(todos) {
 export default function todosReducer(state = [], action) {
 	switch (action.type) {
 		case 'todos/todoAdded': {
-			// Can return just the new todos array - no extra object around it
 			return [
 				...state,
 				{
@@ -16,18 +15,16 @@ export default function todosReducer(state = [], action) {
 				}
 			]
 		}
-		case 'todos/todoToggled': {
-			return state.map((todo) => {
-				if (todo.id !== action.payload) {
-					return todo
-				}
+		case 'todos/todoToggled':
+			return state.map((todo) =>
+				todo.id !== action.payload
+					? todo
+					: {
+							...todo,
+							completed: !todo.completed
+					  }
+			)
 
-				return {
-					...todo,
-					completed: !todo.completed
-				}
-			})
-		}
 		default:
 			return state
 	}

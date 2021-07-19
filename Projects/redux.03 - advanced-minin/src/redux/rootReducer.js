@@ -7,20 +7,18 @@ import {
 	INCREMENT
 } from './types'
 
-// A function returning the updated state
 function counterReducer(state = 0, action) {
 	if (action.type === INCREMENT) {
 		return state + 1
 	} else if (action.type === DECREMENT) {
 		return state - 1
 	}
-
 	return state
 }
 
 const initialThemeState = {
 	value: 'light',
-	disabled: false // our buttons are enabled by default
+	disabled: false
 }
 
 function themeReducer(state = initialThemeState, action) {

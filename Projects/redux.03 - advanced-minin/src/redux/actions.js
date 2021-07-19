@@ -6,44 +6,26 @@ import {
 	DISABLE_BUTTONS
 } from './types'
 
-export function increment() {
-	return {
-		type: INCREMENT
-	}
+export const increment = () => ({ type: INCREMENT })
+export const decrement = () => ({ type: DECREMENT })
+
+/**
+ * 1) Disable buttons
+ * 2) Set up a timer
+ * 3) When the timer fires, perform increment and enable buttons
+ */
+export const asyncIncrement = () => (dispatch) => {
+	dispatch(disableButtons())
+	setTimeout(() => {
+		dispatch(increment())
+		dispatch(enableButtons())
+	}, 1000)
 }
 
-export function decrement() {
-	return {
-		type: DECREMENT
-	}
-}
+export const changeTheme = (newTheme) => ({
+	type: CHANGE_THEME,
+	payload: newTheme
+})
 
-// We use different syntax here to be able to use async callbacks
-export function asyncIncrement() {
-	return function (dispatch) {
-		dispatch(disableButtons())
-		setTimeout(() => {
-			dispatch(increment())
-			dispatch(enableButtons())
-		}, 1000)
-	}
-}
-
-export function changeTheme(newTheme) {
-	return {
-		type: CHANGE_THEME,
-		payload: newTheme
-	}
-}
-
-export function enableButtons() {
-	return {
-		type: ENABLE_BUTTONS
-	}
-}
-
-export function disableButtons() {
-	return {
-		type: DISABLE_BUTTONS
-	}
-}
+export const enableButtons = () => ({ type: ENABLE_BUTTONS })
+export const disableButtons = () => ({ type: DISABLE_BUTTONS })

@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import thunk from 'redux-thunk'
 import counterSlice from '../features/Counter/counterSlice'
 import todoSlice from '../features/Todo/todoSlice'
 
@@ -7,7 +8,7 @@ const logEnhancer =
 	(rootReducer: Function, preloadedState: Object, enhancers: Function[]) => {
 		const store = createStore(rootReducer, preloadedState, enhancers)
 
-		function newDispatch(action: Action) {
+		function newDispatch(action: any) {
 			const result = store.dispatch(action)
 			console.log(store.getState())
 			return result
@@ -21,13 +22,11 @@ const store = configureStore({
 		counter: counterSlice,
 		todos: todoSlice
 	},
-	enhancers: [logEnhancer]
+	enhancers: [logEnhancer],
+	middleware: [thunk]
 })
 
 export default store
 
-// export type RootState = typeof reducer
-export type Action = {
-	type: string
-	payload?: Object
-}
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

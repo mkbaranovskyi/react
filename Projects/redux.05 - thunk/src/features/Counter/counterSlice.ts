@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const asyncIncrement =
-	() => (dispatch: Function, getState: Function) => {
-		setTimeout(() => {
-			dispatch(increment())
-		}, 1000)
-	}
+export const asyncIncrement = (dispatch: Function, getState: Function) => {
+	setTimeout(() => {
+		dispatch(increment())
+	}, 1000)
+}
 
 export const counterSlice = createSlice({
 	name: 'counter',

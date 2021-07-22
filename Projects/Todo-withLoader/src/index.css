@@ -52,6 +52,7 @@ code {
 }
 
 /* ===== LOADER ===== */
+
 .lds-circle {
 	display: inline-block;
 	transform: translateZ(1px);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { connect, ConnectedProps } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
 	decrement,
 	increment,
@@ -8,8 +8,11 @@ import {
 } from './counterSlice'
 import { RootState } from '../../app/store'
 
-const Counter: React.FC<Props> = ({ count, dispatch }) => {
+export const Counter: React.FC = () => {
 	const [incrementBy, setIncrementBy] = useState(0)
+
+	const count = useSelector((state: RootState) => state.counter.value)
+	const dispatch = useDispatch()
 
 	return (
 		<div className="counterContainer">
@@ -25,19 +28,9 @@ const Counter: React.FC<Props> = ({ count, dispatch }) => {
 				value={incrementBy}
 				onChange={(e) => setIncrementBy(+e.target.value)}
 			/>
-			{/* <button onClick={() => dispatch(asyncIncrement())}>
+			<button onClick={() => dispatch(asyncIncrement)}>
 				Async increment (1s delay)
-			</button> */}
+			</button>
 		</div>
 	)
 }
-const mapStateToPsops = (state: RootState) => ({ count: state.counter.value })
-
-// const mapDispatchToProps = () => {}
-
-const connector = connect(mapStateToPsops)
-
-type PropsFromRedux = ConnectedProps<typeof connector>
-type Props = PropsFromRedux & { age: number; name: string }
-
-export default connector(Counter)

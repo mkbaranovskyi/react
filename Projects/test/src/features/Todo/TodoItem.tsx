@@ -1,26 +1,12 @@
-import React, { useContext } from 'react'
-import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
+import { connect, ConnectedProps } from 'react-redux'
+import { removeTodo, toggleTodo } from './todoSlice'
 import { ITodo } from '../../types'
-import { toggleTodo } from './todoSlice'
 
-const TodoItem: React.FC<{
-	todo: ITodo
-	index: number
-}> = ({ todo, index }) => {
+const TodoItem: React.FC<Props> = ({ todo, index, toggleTodo, removeTodo }) => {
 	const classes: string[] = []
 	if (todo.completed) {
 		classes.push('completed')
-	}
-
-	const dispatch = useDispatch()
-
-	const toggleTodo = (id: string) => {
-		dispatch(toggleTodo(id))
-	}
-
-	const removeTodo = (id: string) => {
-		dispatch()
 	}
 
 	return (
@@ -41,4 +27,14 @@ const TodoItem: React.FC<{
 	)
 }
 
-export default TodoItem
+const mapDispatchToProps = () => ({ toggleTodo, removeTodo })
+
+const connector = connect(null, mapDispatchToProps)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux & {
+	todo: ITodo
+	index: number
+}
+
+export default connector(TodoItem)

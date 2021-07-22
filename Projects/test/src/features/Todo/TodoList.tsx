@@ -1,17 +1,15 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { ITodo } from '../../types'
+import { connect, ConnectedProps } from 'react-redux'
 import TodoItem from './TodoItem'
+import { RootState } from '../../app/store'
 
-const TodoList: React.FC = () => {
-	const todos = useSelector((state: any): ITodo[] => state.todos)
-
+const TodoList: React.FC<Props> = ({ todos }) => {
 	if (!todos.length) {
 		return <h5>No todos yet</h5>
 	}
 
 	return (
-		<ul className="todoItem">
+		<ul className="todoList">
 			{todos.map((todo, index) => (
 				<TodoItem todo={todo} key={todo.id} index={index + 1} />
 			))}
@@ -19,4 +17,13 @@ const TodoList: React.FC = () => {
 	)
 }
 
-export default TodoList
+const mapStateToProps = (state: RootState) => ({
+	todos: state.todos
+})
+
+const connector = connect(mapStateToProps)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+type Props = PropsFromRedux
+
+export default connector(TodoList)

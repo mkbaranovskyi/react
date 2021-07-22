@@ -1,5 +1,4 @@
-import { applyMiddleware, createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'
 import {
 	asyncIncrement,
@@ -23,10 +22,10 @@ const logger = (store) => (next) => (action) => {
 	return next(action)
 }
 
-const store = createStore(
-	rootReducer,
-	composeWithDevTools(applyMiddleware(thunk, logger))
-)
+const store = configureStore({
+	reducer: rootReducer,
+	middleware: [thunk, logger]
+})
 
 $addBtn.addEventListener('click', () => {
 	store.dispatch(increment())
